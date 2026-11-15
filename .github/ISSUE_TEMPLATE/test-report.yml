@@ -1,0 +1,68 @@
+name: Test report
+description: Tried the hedronfire test ISO? Tell us how it went, whether it worked or not.
+title: "[test] "
+labels: ["test report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for testing. Reports from real hardware help most, especially ZFS and encrypted installs.
+        Questions are welcome in [#hedronfire on Libera.Chat](https://web.libera.chat/#hedronfire).
+  - type: input
+    id: iso
+    attributes:
+      label: ISO file name
+      description: The name in SHA256SUMS, for example hedronfire-20261115-1942-amd64.iso.
+    validations:
+      required: true
+  - type: input
+    id: machine
+    attributes:
+      label: Computer
+      description: Make and model, or CPU and graphics if you built it. Say if it is a virtual machine.
+      placeholder: "ThinkPad T14 Gen 4 (AMD), or QEMU/KVM with virtio"
+    validations:
+      required: true
+  - type: dropdown
+    id: filesystem
+    attributes:
+      label: Filesystem you chose
+      options:
+        - ext4
+        - ZFS
+        - ZFS, encrypted
+        - ext4, encrypted
+        - Did not get that far
+    validations:
+      required: true
+  - type: dropdown
+    id: result
+    attributes:
+      label: Result
+      options:
+        - Installed and booted
+        - Installed, but something does not work
+        - The installer failed
+        - The live session failed
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what happened instead. For a failure, the step it stopped at.
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: Installer log
+      description: |
+        /var/log/pyr-install/apply-*.log, in the live session or, after an install, on the new system.
+        Read it before you post it: it names your disks and the user you created. It never contains passwords.
+      render: text
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else
+      description: Screenshots, `dmesg` lines, or what you would change.
